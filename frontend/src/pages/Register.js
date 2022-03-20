@@ -11,11 +11,7 @@ const Register = () => {
           <div className="shadow overflow-hidden sm:rounded-md">
 
             <div className='mt-4 mb-1'>
-              <img
-                className="mx-auto h-12 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt="Workflow"
-              />
+
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Registrate</h2>
               <p className="mt-2 text-center text-sm text-gray-600">
                 O{' '}
@@ -27,14 +23,15 @@ const Register = () => {
               <div className="grid grid-cols-6 gap-6">
 
                 <div className="col-span-6 sm:col-span-3">
-                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="code" className="block text-sm font-medium text-gray-700">
                     Code
                   </label>
                   <input
                     type="text"
-                    name="first-name"
-                    id="first-name"
-                    autoComplete="given-name"
+                    name="code"
+                    id="code"
+                    autoComplete="code"
+                    required
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -45,8 +42,9 @@ const Register = () => {
                   </label>
                   <input
                     type="text"
-                    name="last-name"
-                    id="last-name"
+                    name="fullname"
+                    id="fullname"
+                    required
                     autoComplete="family-name"
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
@@ -58,8 +56,9 @@ const Register = () => {
                   </label>
                   <input
                     type="email"
-                    name="email-address"
-                    id="email-address"
+                    name="email"
+                    id="email"
+                    required
                     autoComplete="email"
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
@@ -73,6 +72,7 @@ const Register = () => {
                     type="password"
                     name="password"
                     id="password"
+                    required
                     autoComplete="password"
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />

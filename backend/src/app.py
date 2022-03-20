@@ -9,6 +9,15 @@ MySQL(app)
 CORS(app)
 JWTManager(app)
 
+api_cors_config = {
+    "origins": "*",
+    "allow_headers": "*"
+}
+
+CORS(app, supports_credentials=True, resources={
+    r"/*": api_cors_config
+})
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''

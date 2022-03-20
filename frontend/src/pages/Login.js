@@ -1,8 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const API = process.env.REACT_APP_API;
+
+export const Login = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handelSubmit = async (e) => {
+        e.preventDefault()
+        
+        const opts = {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        };
+
+        const res = await fetch(`${API}/login`, opts)
+        const data = await res.json()
+        if (res.status === 200) {
+          localStorage.setItem('jwt', data.access_token);
+          
+        }
+        else if (res.status === 401) {
+            window.alert(JSON.stringify(data));
+        }
+
+    }
+
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -22,7 +55,7 @@ const Login = () => {
             </p>
           </div>
 
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form onSubmit={handelSubmit} className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -33,6 +66,8 @@ const Login = () => {
                   id="code"
                   name="code"
                   type="text"
+                  onChange={e => setUsername(e.target.value)}
+                  value={username}
                   autoComplete="code"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -47,6 +82,8 @@ const Login = () => {
                   id="password"
                   name="password"
                   type="password"
+                  onChange={e => setPassword(e.target.value)}
+                  value={password}
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
